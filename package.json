@@ -2,12 +2,13 @@
   "name": "youtube",
   "version": "0.1.0",
   "private": true,
-  "type":"module",
+  "type": "module",
   "dependencies": {
+    "buffer": "^6.0.3",
     "cra-template": "1.2.0",
-    "dotenv": "^16.4.7",
     "node-fetch": "^3.3.2",
-    "react": "^18.0.0",
+    "path-browserify": "^1.0.1",
+    "react": "^18.3.1",
     "react-dom": "^18.0.0",
     "react-router-dom": "^7.1.5",
     "react-scripts": "5.0.1"
@@ -35,6 +36,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-    
   }
 }
