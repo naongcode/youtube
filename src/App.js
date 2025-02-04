@@ -5,9 +5,9 @@ import Main from "./Page/Main.js";
 function App() {
   return <div className="App">
     <Routes>
-    <Route path="/*" element={<AppLayout/>}>
-      <Route path='*' element={<Main/>}/>
-    </Route>
+      <Route path="/" element={<AppLayout/>}>
+        <Route index element={<Main/>}/>
+      </Route>
     </Routes>
     </div>;
 }
