@@ -7,6 +7,7 @@
     padding: 10px;
     background-color: white;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
 }
 
 .left-section {
@@ -164,6 +165,7 @@
     border-radius: 20px;
     cursor: pointer;
     transition: .5s;
+    white-space: nowrap;
 }
 
 .create-button:hover {
@@ -222,7 +224,7 @@
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
     padding: 10px;
     border-radius: 8px;
-    z-index: 1000;
+    z-index: 9000;
   }
   
   .profile-section {

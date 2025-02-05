@@ -1,9 +1,9 @@
 import React from 'react';
 import './SideBar.css';
 
-export default function SideBar({ isSidebarExpanded }) {
+export default function SideBar({ isSidebarCollapsed, isSidebarExpanded }) {
   return (
-    <aside className={`sidebar ${isSidebarExpanded ? 'expanded' : 'collapsed'}`}>
+    <aside className={`sidebar ${isSidebarCollapsed ? 'logo-only' : ''} ${isSidebarExpanded ? 'expanded' : 'collapsed'}`}>
       <ul>
         <li>
           <span className="icon">🏠</span>
