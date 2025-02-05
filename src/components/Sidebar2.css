@@ -1,0 +1,112 @@
+.container {
+    width: 250px;
+    float: left;
+    position: fixed;
+    left: 0;
+    height: 100%;
+    text-align: left;
+    overflow-y: scroll;
+  }
+  
+  @media (max-width: 1300px) {
+    .container {
+      width: 90px;
+    }
+    .container .title {
+      display: none;
+    }
+  }
+  
+  .container .link {
+    text-decoration: none;
+    color: black;
+  }
+  
+  @media (max-width: 800px) {
+    .container {
+      display: none;
+    }
+  }
+  
+  /* 스크롤바 */
+  .container::-webkit-scrollbar {
+    border: none;
+    -webkit-appearance: none;
+  }
+  
+  .container::-webkit-scrollbar-thumb {
+    background: darkgrey;
+    border-radius: 8px;
+  }
+  
+  .main-menu {
+    padding: 0px 20px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .main-menu:hover {
+    background-color: #f3f3f3;
+  }
+  
+  @media (max-width: 1300px) {
+    .main-menu {
+      height: 90px;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
+  .menu {
+    padding: 0px 20px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .menu:hover {
+    background-color: #f3f3f3;
+  }
+  
+  @media (max-width: 1300px) {
+    .menu {
+      display: none;
+    }
+  }
+  
+  .icon {
+    margin-right: 20px;
+    height: 25px;
+    align-items: center;
+    display: flex;
+    float: left;
+  }
+  
+  @media (max-width: 1300px) {
+    .icon {
+      margin: 0;
+    }
+  }
+  
+  .menu-span {
+    font-size: 14px;
+  }
+  
+  .line {
+    height: 1px;
+    background: #dedede;
+    margin-top: 14px;
+    margin-bottom: 14px;
+  }
+  
+  @media (max-width: 1300px) {
+    .line {
+      display: none;
+    }
+  }
+  
