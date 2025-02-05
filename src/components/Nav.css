@@ -1,13 +1,14 @@
 .navbar {
     position: relative;
-    top: 60px;
-    left: 250px;
-    width: calc(100% - 350px);
+    /* top: 60px; */
+    /* left: 250px; */   /* 밀려나서 지움 */
+    /* width: calc(100% - 350px); */
     display: flex;
     align-items: center;
     padding: 10px 20px;
     background-color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 40px;
   }
   
   .category-container {

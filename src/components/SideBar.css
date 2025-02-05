@@ -30,12 +30,11 @@
   }
   
   .app-layout.expanded .main-content {
-    margin-left: 240px;
+    /* 본문이 오른쪽으로 밀려나서 지움 */
+    /* margin-left: 240px; */
   }
   
-  .app-layout.collapsed .main-content {
-    margin-left: 70px;
-  }
+
   
   .app-layout.mobile .main-content {
     margin-left: 0;
@@ -69,4 +68,10 @@
       height: 100vh;
       background-color: white;
     }
+
+    /* 반응형으로 변경 */
+    .app-layout.collapsed .main-content {
+      margin-left: 70px;
+    }
+
   }

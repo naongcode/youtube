@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {getRecommendedVideos, getChannelData} from '../api.js'
 import MovieList from '../components/MovieList.js';
+import './Home.css'
 
 export default function Home() {
   const [videos, setVideos] = useState([]);
@@ -33,46 +34,26 @@ export default function Home() {
     fetchVideos();
   }, []);
 
-  // // 시간 변환 함수
-  // function timeAgo(publishedAt) {
-  //   const now = new Date();
-  //   const publishedDate = new Date(publishedAt);
-  //   const diffInSeconds = Math.floor((now - publishedDate) / 1000);
-  
-  //   const timeUnits = [
-  //     { unit: "년", seconds: 60 * 60 * 24 * 365 },
-  //     { unit: "개월", seconds: 60 * 60 * 24 * 30 },
-  //     { unit: "일", seconds: 60 * 60 * 24 },
-  //     { unit: "시간", seconds: 60 * 60 },
-  //     { unit: "분", seconds: 60 },
-  //   ];
-  
-  //   for (const { unit, seconds } of timeUnits) {
-  //     const amount = Math.floor(diffInSeconds / seconds);
-  //     if (amount >= 1) {
-  //       return `${amount}${unit} 전`;
-  //     }
-  //   }
-  //   return "방금 전";
-  // }
-  
-  // // 숫자 축약 함수
-  // function formatViews(views) {
-  //   if (views >= 1_000_000_000) {
-  //     return (views / 1_000_000_000).toFixed(1) + "억회";
-  //   } else if (views >= 1_000_000) {
-  //     return (views / 1_000_000).toFixed(1) + "백만회";
-  //   } else if (views >= 10_000) {
-  //     return (views / 10_000).toFixed(1) + "만회";
-  //   } else if (views >= 1_000) {
-  //     return (views / 1_000).toFixed(1) + "천회";
-  //   } else {
-  //     return views + "회";
-  //   }
-  // }
-  
-
   return (
-    <div>Home</div>
+    <div classname="video-list">
+      {error && <p>{error}</p>} {/* 에러 메시지가 있을 때 출력 */}
+
+      {/* 컨테이너 안에 컴포넌트 출력 */}
+      {videos.length > 0 ? (
+        <div className="video-container">
+          {videos.map((video, index) => (
+
+            <MovieList
+              key={video.id}
+              video={video}
+              profileImage={profileImages[index]}
+              />
+
+          ))}
+        </div>
+      ) : (
+        <p>비디오 로딩 중...</p>  // 비디오가 로딩 중일 때 표시할 문구
+      )}
+    </div>
   )
 }

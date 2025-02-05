@@ -11,7 +11,7 @@ export async function getRecommendedVideos() {
         part: "snippet,contentDetails,statistics",
         chart: "mostPopular",
         regionCode: "KR",
-        maxResults: 10,
+        maxResults: 20,
         key: YOUTUBE_API_KEY
     });
 

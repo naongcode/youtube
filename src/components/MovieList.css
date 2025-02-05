@@ -1,10 +1,11 @@
 .video-item{
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .video-thumbnail img{
-    width: 372px;
-    height: 210px;
+    width: 100%;
+    height: 100%;
     border-radius: 15px;
 }
 
@@ -20,7 +21,21 @@
     margin-right: 10px;
 }
 
+.video-channelInfo{
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
 .video-title{
+    display: -webkit-box;  /* Flexbox처럼 동작하게 설정 */
+    -webkit-line-clamp: 2;  /* 최대 2줄로 제한 */
+    -webkit-box-orient: vertical;  /* 세로 방향으로 텍스트를 쌓음 */
+    overflow: hidden;  /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis;  /* 넘치는 부분에 '...' 표시 */
+    line-height: 1.2em;  /* 라인 높이를 설정해주면 줄 간격 조정 가능 */
+    max-height: 2.4em;  /* 2줄 이상은 보이지 않도록 설정 */
     font-weight: bold;
     font-size: 14px;
 }
