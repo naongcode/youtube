@@ -73,25 +73,6 @@ export default function Home() {
   
 
   return (
-    <div>
-      {error && <p>{error}</p>} {/* 에러 메시지가 있을 때 출력 */}
-
-      {/* 컨테이너 안에 컴포넌트 출력 */}
-      {videos.length > 0 ? (
-        <div className="video-container">
-          {videos.map((video, index) => (
-
-            <MovieList
-              key={video.id}
-              video={video}
-              profileImage={profileImages[index]}
-              />
-
-          ))}
-        </div>
-      ) : (
-        <p>비디오 로딩 중...</p>  // 비디오가 로딩 중일 때 표시할 문구
-      )}
-    </div>
-  );
+    <div>Home</div>
+  )
 }
