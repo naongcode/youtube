@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {getRecommendedVideos, getChannelData} from '../api.js'
 import MovieList from '../components/MovieList.js';
 import './Home.css'
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   const [videos, setVideos] = useState([]);
@@ -17,7 +18,11 @@ export default function Home() {
         
         const channelImages = await Promise.all(
           data.items.map(async (video) => {
-            const profileImage = await getChannelData(video.snippet.channelId);
+            const channelData = await getChannelData(video.snippet.channelId);
+            console.log(channelData);
+            const profileImage = channelData.items[0]?.snippet?.thumbnails?.default?.url;
+            
+            console.log(profileImage);
             return profileImage || "default_image_url_here";  // 기본 이미지를 반환
           })
         );
@@ -42,12 +47,13 @@ export default function Home() {
       {videos.length > 0 ? (
         <div className="video-container">
           {videos.map((video, index) => (
-
+            <Link to={`/watch/${video.id}`}>
             <MovieList
               key={video.id}
               video={video}
               profileImage={profileImages[index]}
               />
+              </Link>
 
           ))}
         </div>
