@@ -3,6 +3,7 @@
 
 //API_KEY
 const YOUTUBE_API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
+let nextPageToken = "";
 
 // 추천 영상 가져오는 함수
 export async function getRecommendedVideos() {
@@ -12,6 +13,7 @@ export async function getRecommendedVideos() {
         chart: "mostPopular",
         regionCode: "KR",
         maxResults: 20,
+        pageToken: nextPageToken,
         key: YOUTUBE_API_KEY
     });
 
@@ -22,6 +24,8 @@ export async function getRecommendedVideos() {
         // data.items.forEach(item => {
         //     console.log(`▶ ${item.snippet.title} (https://www.youtube.com/watch?v=${item.id})`);
         // });
+
+        nextPageToken = data.nextPageToken || "";
 
         return data;
 
