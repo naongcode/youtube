@@ -3,6 +3,7 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import Header from './components/Header.js';
 import SideBar from './components/SideBar.js';
 import Main from './Page/Main.js';
+import Finder from './components/Finder.js';  
 import VideoDetail from './Page/VideoDetail.js';
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
       <Routes>
         <Route path="/*" element={<AppLayout />} >
           <Route path='*' element={<Main/>}/>
-          <Route path='watch/:videoId' element={<VideoDetail/>}/>
+          <Route path='search/:searchTerm' element={<Finder />} /> {/* 검색 */}
+          <Route path='watch/:videoId' element={<VideoDetail/>} /> {/* 개별 동영상 상세 */}
         </Route>
       </Routes>
     </div>
@@ -41,21 +43,16 @@ function AppLayout() {
   }, []);
 
   const handleSidebarToggle = () => {
-    // 작은 화면에서는 전체 확장/축소
     if (isMobileView) {
       setIsSidebarExpanded(!isSidebarExpanded);
     } else {
-      // 큰 화면에서는 축소(로고만 보이기) / 확장
       setIsSidebarCollapsed(!isSidebarCollapsed);
     }
   };
 
   return (
     <div className={`app-layout ${isSidebarExpanded ? 'expanded' : 'collapsed'} ${isMobileView ? 'mobile' : ''}`}>
-      <Header 
-        setIsSidebarExpanded={handleSidebarToggle} 
-        isSidebarExpanded={isSidebarExpanded} 
-      />
+      <Header setIsSidebarExpanded={handleSidebarToggle} isSidebarExpanded={isSidebarExpanded} />
       <SideBar isSidebarCollapsed={isSidebarCollapsed} isSidebarExpanded={isSidebarExpanded} />
       <main className="main-content">
         <Outlet />
