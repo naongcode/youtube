@@ -44,7 +44,7 @@ export async function getRecommendedVideos() {
 export async function getChannelData(channelId) {
     const url = "https://www.googleapis.com/youtube/v3/channels";
     const params = new URLSearchParams({
-        part: "snippet",
+        part: "snippet,statistics",
         id: channelId,
         key: YOUTUBE_API_KEY
     });
@@ -52,9 +52,39 @@ export async function getChannelData(channelId) {
     try {
         const response = await fetch(`${url}?${params}`);
         const data = await response.json();
-        if (data.items && data.items.length > 0) {
-            return data.items[0].snippet.thumbnails.default.url;
-        }
+        return data;
+    } catch (error) {
+        console.error("채널 정보 가져오기 중 오류 발생:", error);
+    }
+}
+export async function getVideoData(videoId) {
+    const url = "https://www.googleapis.com/youtube/v3/videos";
+    const params = new URLSearchParams({
+        part: "snippet,statistics",
+        id: videoId,
+        key: YOUTUBE_API_KEY
+    });
+
+    try {
+        const response = await fetch(`${url}?${params}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("채널 정보 가져오기 중 오류 발생:", error);
+    }
+}
+export async function getCommentData(videoId) {
+    const url = "https://www.googleapis.com/youtube/v3/commentThreads";
+    const params = new URLSearchParams({
+        part: "snippet",
+        videoId:videoId,
+        key: YOUTUBE_API_KEY,
+    });
+
+    try {
+        const response = await fetch(`${url}?${params}`);
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.error("채널 정보 가져오기 중 오류 발생:", error);
     }
