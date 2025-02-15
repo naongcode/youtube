@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import {getRecommendedVideos, getChannelData} from '../api.js'
 import MovieList from '../components/MovieList.js';
 import './Home.css'
@@ -10,7 +10,7 @@ export default function Home() {
   const [page, setPage] = useState(1); 
   const [loading, setLoading] = useState(false); 
   const [hasMore, setHasMore] = useState(true);
-
+  const [error, setError] = useState(null);
   const observerRef = useRef(null);
 
 
@@ -19,45 +19,16 @@ export default function Home() {
     if (loading || !hasMore) return;
 
     setLoading(true);
-    console.log(`현재 페이지: ${page}`);
+    // console.log(`현재 페이지: ${page}`);
 
     try {
       const data = await getRecommendedVideos(page);
-      console.log("새로 받아온 데이터:", data.items);
+      // console.log("새로 받아온 데이터:", data.items);
 
       if (!data || !data.items || data.items.length === 0) {
         setHasMore(false);
         return;
-
-
-  useEffect(() => {
-  
-    //충돌시작
-//     async function fetchVideos() {
-//       try {
-//         const data = await getRecommendedVideos(); // 비동기 API 호출
-//         setVideos(data.items);  // 데이터가 성공적으로 받아졌을 때 상태 업데이트
-        
-//         const channelImages = await Promise.all(
-//           data.items.map(async (video) => {
-//             const channelData = await getChannelData(video.snippet.channelId);
-//             console.log(channelData);
-//             const profileImage = channelData.items[0]?.snippet?.thumbnails?.default?.url;
-            
-//             console.log(profileImage);
-//             return profileImage || "default_image_url_here";  // 기본 이미지를 반환
-//           })
-//         );
-//         setProfileImages(channelImages);
-
-//         // console.log(data.items);
-//         // console.log('프로필',channelImages);
-
-//       } catch (error) {
-//         console.error("API 요청 중 오류 발생:", error);
-//         setError("비디오를 불러오는 데 오류가 발생했습니다."); // 에러 메시지 상태 업데이트
-//      }
-   // 충돌종료
+      }
 
       // 새롭게 불러온 데이터를 기존 데이터에 추가 (중복 제거)
       setVideos((prevVideos) => [
@@ -75,6 +46,7 @@ export default function Home() {
       setProfileImages((prevImages) => [...prevImages, ...channelImages]);
     } catch (error) {
       console.error("API 요청 중 오류 발생:", error);
+      setError("비디오를 불러오는 데 오류가 발생했습니다.");
     } finally {
       setLoading(false);
     }
@@ -109,19 +81,20 @@ export default function Home() {
 
   return (
     <div className="video-list">
-      {error && <p>{error}</p>} {/* 에러 메시지가 있을 때 출력 */}
+      {error && <p>{error}</p>}
 
       {/* 컨테이너 안에 컴포넌트 출력 */}
       {videos.length > 0 ? (
         <div className="video-container">
           {videos.map((video, index) => (
 
+            <Link to={`/watch/${video.id}`}>
             <MovieList 
               key={`${video.id}-${index}`} 
               video={video} 
               profileImage={profileImages[index]} 
               />
-
+            </Link>
           ))}
         </div>
       ) : (
