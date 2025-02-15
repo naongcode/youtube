@@ -15,3 +15,26 @@ a{
   text-decoration: inherit;
   color:inherit;
 }
+
+/* 기본 스타일 */
+body {
+  background-color: white;
+  color: black;
+}
+
+/* 다크 모드 */
+.dark-mode body{
+  background-color: #333;
+  color: white;
+}
+
+.dark-mode .header {
+  background-color: #333;
+  color: white;
+}
+
+/* 기타 다크모드 요소 스타일 */
+.dark-mode .button {
+  background-color: #333;
+  color: white;
+}

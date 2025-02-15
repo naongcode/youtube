@@ -19,10 +19,10 @@ export default function Home() {
         const channelImages = await Promise.all(
           data.items.map(async (video) => {
             const channelData = await getChannelData(video.snippet.channelId);
-            console.log(channelData);
+            // console.log(channelData);
             const profileImage = channelData.items[0]?.snippet?.thumbnails?.default?.url;
             
-            console.log(profileImage);
+            // console.log(profileImage);
             return profileImage || "default_image_url_here";  // 기본 이미지를 반환
           })
         );
@@ -40,7 +40,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div classname="video-list">
+    <div className="video-list">
       {error && <p>{error}</p>} {/* 에러 메시지가 있을 때 출력 */}
 
       {/* 컨테이너 안에 컴포넌트 출력 */}

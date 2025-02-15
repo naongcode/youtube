@@ -3,6 +3,7 @@ import { AiOutlineSearch, AiOutlineArrowLeft, AiOutlineMenu, AiOutlinePlus, AiFi
 import { MdKeyboard, MdMic } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import './Header.css';
+import { setupDarkModeButton } from './darkMode.js';
 
 export default function Header({ setIsSidebarExpanded, isSidebarExpanded }) {
   const [isSearchMode, setIsSearchMode] = useState(false);
@@ -12,6 +13,9 @@ export default function Header({ setIsSidebarExpanded, isSidebarExpanded }) {
   const navigate = useNavigate();
 
   useEffect(() => {
+
+    
+
     const handleClickOutside = (event) => {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
         setIsProfileMenuOpen(false);
@@ -64,6 +68,7 @@ export default function Header({ setIsSidebarExpanded, isSidebarExpanded }) {
             src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
             alt="YouTube Logo"
             className="logo"
+            onClick={() => navigate('/')}
           />
           <span className="premium-text">Premium</span>
         </div>
@@ -138,6 +143,8 @@ export default function Header({ setIsSidebarExpanded, isSidebarExpanded }) {
                   <li>YouTube 스튜디오</li>
                   <li>내 Premium 혜택</li>
                   <li>구매 항목 및 멤버십</li>
+                  <hr />
+                  <li><button id="darkModeToggle" onClick={setupDarkModeButton}>다크모드</button></li>
                   <hr />
                   <li>설정</li>
                   <li>고객센터</li>
