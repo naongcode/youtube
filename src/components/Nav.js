@@ -13,24 +13,32 @@ export default function Navbar() {
   const [showRightArrow, setShowRightArrow] = useState(false);
   const containerRef = useRef(null);
 
+  
+  //useEffect밖에 함수를 정의
+  const handleResizeOrScroll = () => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    setShowLeftArrow(container.scrollLeft > 0);
+    setShowRightArrow(container.scrollLeft + container.clientWidth < container.scrollWidth);
+  };
+
   useEffect(() => {
-    const handleResizeOrScroll = () => {
-      const container = containerRef.current;
-      if (!container) return;
+    const container = containerRef.current;
+    if(!container) return; //container가 존재하는지 확인
 
-      setShowLeftArrow(container.scrollLeft > 0);
-      setShowRightArrow(container.scrollLeft + container.clientWidth < container.scrollWidth);
-    };
-
-    handleResizeOrScroll();
+    handleResizeOrScroll(); //초기실행
     window.addEventListener('resize', handleResizeOrScroll);
-    containerRef.current.addEventListener('scroll', handleResizeOrScroll);
+    container.addEventListener('scroll', handleResizeOrScroll);
 
     return () => {
       window.removeEventListener('resize', handleResizeOrScroll);
-      containerRef.current.removeEventListener('scroll', handleResizeOrScroll);
-    };  
+      if(container){
+        container.removeEventListener('scroll', handleResizeOrScroll);
+      }
+    };
   }, []);
+
 
   const scrollLeft = () => {
     containerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
