@@ -31,6 +31,7 @@ export default function Finder() {
         const videoIds = searchResponse.data.items
           .map((item) => item.id.videoId)
           .join(',');
+
         const detailResponse = await axios.get(
           'https://www.googleapis.com/youtube/v3/videos',
           {
@@ -60,20 +61,24 @@ export default function Finder() {
     fetchVideos();
   }, [searchTerm, API_KEY]); // 검색어가 변경될 때마다 동영상 검색
 
+
   return (
     <div className='finder'>
       {loading ? (
         <p>검색 중...</p>
       ) : videos.length > 0 ? (
-        videos.map((video) => (
-          <Link to={`/watch/${video.id.videoId}`} key={video.id.videoId}>
-            <MovieList
-              key={video.id.videoId}
-              video={video}
-              profileImage={video.snippet.thumbnails.default.url}
-            />
-          </Link>
-        ))
+        <ul className='movie-list'> 
+          {videos.map((video) => (
+            <li key={video.id.videoId} className='movie-item'>
+              <Link to={`/watch/${video.id.videoId}`}>
+                <MovieList
+                  video={video}
+                  profileImage={video.snippet.thumbnails.default.url}
+                />
+              </Link>
+            </li>
+          ))}
+        </ul>
       ) : (
         <p>검색 결과가 없습니다.</p>
       )}
