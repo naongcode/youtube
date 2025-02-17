@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
-import Nav from '../components/Nav.js'
+// import Nav from '../components/Nav.js'
 import Home from './Home.js'
 import Short from './Short.js'
 import Subscribe from './Subscribe.js'
@@ -24,7 +24,8 @@ export default function Main() {
 function MainLayout(){
     return (
         <div>
-            <Nav/>
+            {/* 홈.js로 이동 */}
+            {/* <Nav/> */} 
             <Outlet/>
         </div>
     )

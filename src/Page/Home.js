@@ -3,6 +3,7 @@ import { getRecommendedVideos, getChannelData } from '../api.js';
 import MovieList from '../components/MovieList.js';
 import './Home.css';
 import { Link } from 'react-router-dom';
+import Nav from '../components/Nav.js'
 
 export default function Home() {
   const [videos, setVideos] = useState([]);
@@ -82,31 +83,36 @@ export default function Home() {
   }, [hasMore, loading]);
 
   return (
-    <div className='video-list'>
-      {error && <p>{error}</p>}
+    <div>
+      <Nav/>
+    
+      <div className='video-list'>
+        {error && <p>{error}</p>}
 
-      {/* 컨테이너 안에 컴포넌트 출력 */}
-      {videos.length > 0 ? (
-        <div className='video-container'>
-          {videos.map((video, index) => (
-            <Link to={`/watch/${video.id}`}>
-              <MovieList
-                key={`${video.id}-${index}`}
-                video={video}
-                profileImage={profileImages[index]}
-              />
-            </Link>
-          ))}
-        </div>
-      ) : (
-        <p>비디오 로딩 중...</p>
-      )}
+        {/* 컨테이너 안에 컴포넌트 출력 */}
+        {videos.length > 0 ? (
+          <div className='video-container'>
+            {videos.map((video, index) => (
+              <Link to={`/watch/${video.id}`}>
+                <MovieList
+                  key={`${video.id}-${index}`}
+                  video={video}
+                  profileImage={profileImages[index]}
+                />
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <p>비디오 로딩 중...</p>
+        )}
 
-      {loading && <p>⏳ 로딩 중...</p>}
-      {!hasMore && <p>더 이상 불러올 비디오가 없습니다.</p>}
+        {loading && <p>⏳ 로딩 중...</p>}
+        {!hasMore && <p>더 이상 불러올 비디오가 없습니다.</p>}
 
-      {/* 바닥 감지용 div */}
-      <div id='scroll-anchor' style={{ height: '10px' }}></div>
+        {/* 바닥 감지용 div */}
+        <div id='scroll-anchor' style={{ height: '10px' }}></div>
+      </div>
+
     </div>
   );
 }
