@@ -3,9 +3,10 @@ import { AiOutlineSearch, AiOutlineArrowLeft, AiOutlineMenu, AiOutlinePlus, AiFi
 import { MdKeyboard, MdMic } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import './Header.css';
-import { setupDarkModeButton } from './darkMode.js';
+import { useTheme } from '../context/themeProvider.js';
 
-export default function Header({ setIsSidebarExpanded, isSidebarExpanded }) {
+
+export default function Header({ setIsSidebarExpanded, isSidebarExpanded}) {
   const [isSearchMode, setIsSearchMode] = useState(false);
   const [search, setSearch] = useState('');
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);  
@@ -13,8 +14,6 @@ export default function Header({ setIsSidebarExpanded, isSidebarExpanded }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-
-    
 
     const handleClickOutside = (event) => {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -54,6 +53,10 @@ export default function Header({ setIsSidebarExpanded, isSidebarExpanded }) {
     if (!search.trim()) return;
     navigate(`/search/${search}`);  // 검색어로 새로운 URL로 이동
   };
+
+  // 다크모드 토글
+  const {themeMode, toggleTheme} = useTheme();
+  // console.log(toggleTheme)
 
   return (
     <header className="header">
@@ -113,7 +116,7 @@ export default function Header({ setIsSidebarExpanded, isSidebarExpanded }) {
           </div>
           <div ref={profileRef} className="profile-container">
             <img
-              src="https://via.placeholder.com/32"
+              src="/youtube/asset/profile.svg"
               alt="User Profile"
               className="profile-img"
               onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}  // 메뉴 토글
@@ -122,7 +125,7 @@ export default function Header({ setIsSidebarExpanded, isSidebarExpanded }) {
               <div className="dropdown-menu">
                 <div className="profile-section">
                   <img
-                    src="https://via.placeholder.com/32"
+                    src="/youtube/asset/profile.svg"
                     alt="User Profile"
                     className="dropdown-profile-img"
                   />
@@ -144,7 +147,10 @@ export default function Header({ setIsSidebarExpanded, isSidebarExpanded }) {
                   <li>내 Premium 혜택</li>
                   <li>구매 항목 및 멤버십</li>
                   <hr />
-                  <li><button id="darkModeToggle" onClick={setupDarkModeButton}>다크모드</button></li>
+                  <li>
+                    <button onClick={toggleTheme}>
+                      {themeMode === "light" ? "다크" : "라이트"}
+                    </button></li>
                   <hr />
                   <li>설정</li>
                   <li>고객센터</li>

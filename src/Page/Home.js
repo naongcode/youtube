@@ -93,7 +93,7 @@ export default function Home() {
         {videos.length > 0 ? (
           <div className='video-container'>
             {videos.map((video, index) => (
-              <Link to={`/watch/${video.id}`}>
+              <Link key={`${video.id}-${index}`} to={`/watch/${video.id}`}>
                 <MovieList
                   key={`${video.id}-${index}`}
                   video={video}
