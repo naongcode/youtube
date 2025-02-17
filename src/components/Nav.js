@@ -1,12 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Nav.css';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import { categories } from './categories.js';
 
 export default function Navbar() {
-  const categories = [
-    '전체', '게임', '음악', '믹스', '라이브', '드라마', '액션 어드벤처 게임',
-    '요리', '최근에 업로드된 동영상', '감상한 동영상', '새로운 맞춤 동영상'
-  ];
 
   const [activeCategory, setActiveCategory] = useState('전체');
   const [showLeftArrow, setShowLeftArrow] = useState(false);
