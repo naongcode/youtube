@@ -7,15 +7,16 @@
   
   .sidebar {
     height: 100vh;
-    /* background-color: white; */
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     position: relative;
-    top: 70px;
+    top: 65px;
+    z-index: 1001;
   }
   
   .sidebar.expanded {
     width: 240px;
+    background-color:white ;
   }
   
   .sidebar.collapsed {
@@ -27,14 +28,7 @@
     overflow-y: auto;
     transition: margin-left 0.3s ease;
   }
-  
-  .app-layout.expanded .main-content {
-    /* 본문이 오른쪽으로 밀려나서 지움 */
-    /* margin-left: 240px; */
-  }
-  
 
-  
   .app-layout.mobile .main-content {
     margin-left: 0;
   }
@@ -59,7 +53,18 @@
   .text {
     font-size: 14px;
   }
-  
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* 반투명 검은 배경 */
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+  }
+
   @media (max-width: 768px) {
     .sidebar {
       position: absolute;
@@ -73,4 +78,33 @@
       margin-left: 70px;
     }
 
+  }
+
+  /* 기본 사이드바 스타일 */
+  .sidebar {
+    transition: width 0.3s ease, transform 0.3s ease;
+  }
+
+  /* PC에서 확장 상태 */
+  .sidebar.expanded {
+    width: 240px;
+  }
+
+  /* 축소 상태 */
+  .sidebar.collapsed {
+    width: 70px;
+  }
+
+  /* 모바일에서는 숨김 */
+  @media (max-width: 650px) {
+    .sidebar {
+      width: 100%;
+      transform: translateX(-100%);
+    }
+    .sidebar.expanded {
+      transform: translateX(0);
+    }
+    .app-layout.collapsed .main-content {
+      margin-left: 0px;
+    }
   }

@@ -27,47 +27,60 @@ function App() {
 }
 
 function AppLayout() {
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
-  const [isMobileView, setIsMobileView] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(window.innerWidth >= 1200);
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 650);
+  const [isTabletView, setIsTabletView] = useState(window.innerWidth > 650 && window.innerWidth < 1200);
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setIsMobileView(true);
-        setIsSidebarExpanded(false);
-      } else {
-        setIsMobileView(false);
-        setIsSidebarCollapsed(false);
+      const width = window.innerWidth;
+      setIsMobileView(width <= 650);
+      setIsTabletView(width > 650 && width < 1200);
+
+      if (width >= 1200) {
         setIsSidebarExpanded(true);
+        setIsOverlayVisible(false);
+      } else {
+        setIsSidebarExpanded(false);
+        setIsOverlayVisible(false);
       }
     };
 
-    handleResize(); // 초기 체크
     window.addEventListener('resize', handleResize);
+    handleResize(); // 초기 실행
+
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const handleSidebarToggle = () => {
-    if (isMobileView) {
-      setIsSidebarExpanded(!isSidebarExpanded);
-    } else {
-      setIsSidebarCollapsed(!isSidebarCollapsed);
+    setIsSidebarExpanded((prev) => !prev);
+    if (isMobileView || isTabletView) {
+      setIsOverlayVisible((prev) => !prev);
     }
   };
 
-  // 다크모드 토글
-  const {themeMode, toggleTheme} = useTheme();
+  const closeSidebar = () => {
+    setIsSidebarExpanded(false);
+    setIsOverlayVisible(false);
+  };
+
+  // 다크모드 설정
+  const { themeMode, toggleTheme } = useTheme();
 
   return (
     <div className={`app-layout ${isSidebarExpanded ? 'expanded' : 'collapsed'} ${isMobileView ? 'mobile' : ''}`}>
-      <Header setIsSidebarExpanded={handleSidebarToggle} isSidebarExpanded={isSidebarExpanded} 
-        themeMode={themeMode} toggleTheme={toggleTheme}/>
-      <SideBar isSidebarCollapsed={isSidebarCollapsed} isSidebarExpanded={isSidebarExpanded} />
+      <Header 
+        setIsSidebarExpanded={handleSidebarToggle} 
+        isSidebarExpanded={isSidebarExpanded} 
+        themeMode={themeMode} 
+        toggleTheme={toggleTheme} 
+      />
+      {isOverlayVisible && (isMobileView || isTabletView) && <div className="overlay" onClick={closeSidebar}></div>}
+      <SideBar isSidebarExpanded={isSidebarExpanded} />
       <main className="main-content">
         <Outlet />
       </main>
-      {/* <TestComponent/> */}
     </div>
   );
 }

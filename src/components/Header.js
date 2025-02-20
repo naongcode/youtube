@@ -12,6 +12,18 @@ export default function Header({ setIsSidebarExpanded, isSidebarExpanded}) {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);  
   const profileRef = useRef(null); 
   const navigate = useNavigate();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   useEffect(() => {
 
@@ -65,7 +77,7 @@ export default function Header({ setIsSidebarExpanded, isSidebarExpanded}) {
           <AiOutlineMenu
             size={24}
             className="menu-icon"
-            onClick={() => setIsSidebarExpanded(!isSidebarExpanded)}
+            onClick={() => setIsSidebarExpanded((prev) => !prev)}
           />
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
