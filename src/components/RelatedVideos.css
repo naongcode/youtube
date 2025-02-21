@@ -1,0 +1,21 @@
+.related_section {
+}
+.related_section .video-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: baseline;
+}
+.related_section .video-channelImage {
+  display: none;
+}
+.related_section .video-thumbnail img {
+  border-radius: 10px;
+  width: 168px;
+  height: 94px;
+}
+.related_section .video-title {
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: 10px;
+}

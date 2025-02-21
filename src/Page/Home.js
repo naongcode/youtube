@@ -3,10 +3,12 @@ import { getRecommendedVideos, getChannelData } from '../api.js';
 import MovieList from '../components/MovieList.js';
 import './Home.css';
 import { Link } from 'react-router-dom';
-import Nav from '../components/Nav.js'
+import Nav from '../components/Nav.js';
+import { categories } from '../components/categories.js';
 
 export default function Home() {
   const [videos, setVideos] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(categories[0]);
   const [profileImages, setProfileImages] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -84,8 +86,12 @@ export default function Home() {
 
   return (
     <div>
-      <Nav/>
-    
+      <Nav
+        activeCategory={activeCategory}
+        setActiveCategory={setActiveCategory}
+        categories={categories}
+      />
+
       <div className='video-list'>
         {error && <p>{error}</p>}
 
@@ -112,7 +118,6 @@ export default function Home() {
         {/* 바닥 감지용 div */}
         <div id='scroll-anchor' style={{ height: '10px' }}></div>
       </div>
-
     </div>
   );
 }
