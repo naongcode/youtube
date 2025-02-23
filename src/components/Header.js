@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AiOutlineSearch, AiOutlineArrowLeft, AiOutlineMenu, AiOutlinePlus, AiFillBell } from 'react-icons/ai';
 import { MdKeyboard, MdMic } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Header.css';
 import { useTheme } from '../context/themeProvider.js';
+import { ReactComponent as YouTubeLogo } from '../asset/YouTube_Logo_2017.svg';
 
 
 export default function Header({ setIsSidebarExpanded, isSidebarExpanded}) {
@@ -79,12 +80,17 @@ export default function Header({ setIsSidebarExpanded, isSidebarExpanded}) {
             className="menu-icon"
             onClick={() => setIsSidebarExpanded((prev) => !prev)}
           />
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
+          {/* <img
+            src="youtube/asset/YouTube_Logo_2017.svg"
             alt="YouTube Logo"
             className="logo"
             onClick={() => navigate('/')}
-          />
+          /> */}
+          <Link to="/">
+            <YouTubeLogo className='logo'/>
+          </Link>
+          
+
           <span className="premium-text">Premium</span>
         </div>
       ) : null}

@@ -16,7 +16,7 @@
   
   .sidebar.expanded {
     width: 240px;
-    background-color:white ;
+    /* background-color:white ; */
   }
   
   .sidebar.collapsed {

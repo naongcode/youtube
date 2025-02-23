@@ -16,7 +16,7 @@ export const CustomThemeProvider = ({ children }) => {
   const toggleTheme = useCallback(() => {
     setThemeMode(prevMode => {
       const newMode = prevMode === "light" ? "dark" : "light";
-      localStorage.setItem("theMode", newMode);
+      localStorage.setItem("themeMode", newMode);
       return newMode;
     });
   }, []);
